@@ -13,6 +13,7 @@ use RainLab\Translate\Models\Locale as LocaleModel;
 class Plugin extends PluginBase
 {
     public $require = ['RainLab.Translate'];
+
     /**
      * Returns information about this plugin.
      *
@@ -60,13 +61,7 @@ class Plugin extends PluginBase
             $form->addFields([
                 'domain' => [
                     'label' => 'Domain',
-                    'type' => 'text',
-                    'span' => 'left'
-                ],
-                'is_domain_redirect' => [
-                    'label' => 'Redirect to this domain',
-                    'type' => 'checkbox',
-                    'span' => 'right'
+                    'type' => 'text'
                 ],
             ]);
         });

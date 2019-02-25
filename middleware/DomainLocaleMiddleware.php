@@ -1,24 +1,32 @@
 <?php namespace Samuell\DomainLocale\Middleware;
 
 use Closure;
-use Request;
 
 use RainLab\Translate\Classes\Translator;
 use RainLab\Translate\Models\Locale;
+use Samuell\DomainLocale\Models\Settings;
+
+use Samuell\DomainLocale\Classes\Helper;
 
 class DomainLocaleMiddleware
 {
     public function handle($request, Closure $next)
     {
-        $domain = $request->getHttpHost();
+        $domain = Settings::get('use_tld', false)
+            ? Helper::getDomainTld($request->getHttpHost())
+            : $request->getHttpHost();
+
         $locale = Locale::isEnabled()->where('domain', $domain)->first();
 
-        if ($locale) {
-
-            if ($locale->is_domain_redirect && $locale->code != $this->getDefaultLocale()) {
-                return redirect($locale->domain);
+        // if user language is not same as domain we redirect him to correct language domain if exists
+        if (Settings::get('auto_domain_redirect', false) && $locale->code != $this->getUserLocale()) {
+            if ($redirectLocale = Locale::findByCode($this->getUserLocale())) {
+                return redirect($this->addHttpToUrl($redirectLocale->domain));
             }
+        }
 
+        // set locale
+        if ($locale) {
             $translator = Translator::instance();
             $translator->setLocale($locale->code);
         }
@@ -26,20 +34,12 @@ class DomainLocaleMiddleware
         return $next($request);
     }
 
-    private function getTld($host): string
+    public function addHttpToUrl($url)
     {
-        return str_replace('.', '', substr(strrchr($host, '.'), 0));
-    }
-
-    public function getDefaultLocale()
-    {
-        $locales = Locale::listAvailable();
-        foreach (Request::getLanguages() as $requestLang) {
-            if (array_key_exists($requestLang, $locales)) {
-                return $requestLang;
-            }
+        $parsed = parse_url($url);
+        if (empty($parsed['scheme'])) {
+            return 'http://'.ltrim($url, '/');
         }
 
-        return $this->defaultLocale;
     }
 }
