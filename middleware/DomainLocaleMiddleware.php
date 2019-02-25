@@ -40,6 +40,6 @@ class DomainLocaleMiddleware
         if (empty($parsed['scheme'])) {
             return 'http://'.ltrim($url, '/');
         }
-
+        return $url;
     }
 }
