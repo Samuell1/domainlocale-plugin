@@ -4,6 +4,12 @@ fields:
         comment: Automatic redirect to correct domain depending on user language
         type: switch
         default: false
+    redirec_only_empty_uri:
+        label: Redirect only when uri is empty
+        comment: "This prevents redirect when user is on subpage (Example: page.com/about)"
+        type: switch
+        default: false
+
     use_tld:
         label: Use domain TLD
         type: switch
