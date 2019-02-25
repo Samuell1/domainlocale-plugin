@@ -2,6 +2,8 @@
 
 use Request;
 
+use RainLab\Translate\Models\Locale;
+
 class Helper
 {
     static public function getUserLocale(): string
