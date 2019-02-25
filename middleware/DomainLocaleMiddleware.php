@@ -19,8 +19,8 @@ class DomainLocaleMiddleware
         $locale = Locale::isEnabled()->where('domain', $domain)->first();
 
         // if user language is not same as domain we redirect him to correct language domain if exists
-        if (Settings::get('auto_domain_redirect', false) && $locale->code != $this->getUserLocale()) {
-            if ($redirectLocale = Locale::findByCode($this->getUserLocale())) {
+        if (Settings::get('auto_domain_redirect', false) && $locale->code != Helper::getUserLocale()) {
+            if ($redirectLocale = Locale::findByCode(Helper::getUserLocale())) {
                 return redirect($this->addHttpToUrl($redirectLocale->domain));
             }
         }
