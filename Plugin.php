@@ -12,6 +12,7 @@ use RainLab\Translate\Models\Locale as LocaleModel;
  */
 class Plugin extends PluginBase
 {
+    public $require = ['RainLab.Translate'];
     /**
      * Returns information about this plugin.
      *
