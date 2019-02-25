@@ -1,0 +1,10 @@
+fields:
+    auto_domain_redirect:
+        label: Automatic redirect
+        comment: Automatic redirect to correct domain depending on user language
+        type: switch
+        default: false
+    use_tld:
+        label: Use domain TLD
+        type: switch
+        default: false

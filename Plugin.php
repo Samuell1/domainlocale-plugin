@@ -122,4 +122,20 @@ class Plugin extends PluginBase
             ],
         ];
     }
+
+    public function registerSettings()
+    {
+        return [
+            'settings' => [
+                'label'       => 'DomainLocale Settings',
+                'description' => '',
+                //'category'    => 'Misc',
+                'icon'        => 'icon-cog',
+                'class'       => 'Samuell\DomainLocale\Models\Settings',
+                'order'       => 1,
+                'keywords'    => '',
+                'permissions' => ['samuell.domainlocale.settings']
+            ],
+        ];
+    }
 }
