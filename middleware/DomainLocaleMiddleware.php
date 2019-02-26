@@ -20,10 +20,10 @@ class DomainLocaleMiddleware
 
         // if user language is not same as domain we redirect him to correct language domain if exists
         if (Settings::get('auto_domain_redirect', false) && $locale->code != Helper::getUserLocale()) {
+            // redirect to other domain depending if URI is empty
             $isUriEmpty = Settings::get('redirec_only_empty_uri', false)
                 ? empty(trim($request->getRequestUri(), '/'))
                 : true;
-            // Redirect to other domain but only when Uri is empty
             if ($redirectLocale = Locale::findByCode(Helper::getUserLocale()) && $isUriEmpty) {
                 return redirect($this->addHttpToUrl($redirectLocale->domain));
             }
