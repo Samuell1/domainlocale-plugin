@@ -123,8 +123,7 @@ class Plugin extends PluginBase
         return [
             'settings' => [
                 'label'       => 'DomainLocale Settings',
-                'description' => '',
-                //'category'    => 'Misc',
+                'description' => 'Manage the settings for DomainLocale plugin',
                 'icon'        => 'icon-cog',
                 'class'       => 'Samuell\DomainLocale\Models\Settings',
                 'order'       => 1,
