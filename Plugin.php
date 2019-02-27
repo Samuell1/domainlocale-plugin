@@ -126,7 +126,6 @@ class Plugin extends PluginBase
                 'description' => 'Manage the settings for DomainLocale plugin',
                 'icon'        => 'icon-cog',
                 'class'       => 'Samuell\DomainLocale\Models\Settings',
-                'order'       => 1,
                 'keywords'    => '',
                 'permissions' => ['samuell.domainlocale.settings']
             ],
