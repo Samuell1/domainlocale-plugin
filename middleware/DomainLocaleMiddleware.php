@@ -23,6 +23,7 @@ class DomainLocaleMiddleware
             // if user language is not same as domain we redirect him to correct language domain if exists
             if (Settings::get('auto_domain_redirect', false) && $locale->code != Helper::getUserLocale()) {
 
+                // allow redirect only for default domain
                 $allowRedirect = Settings::get('use_default_only_for_redirect', false)
                     ? $locale->is_default
                     : true;
