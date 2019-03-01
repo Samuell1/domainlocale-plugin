@@ -18,19 +18,28 @@ class DomainLocaleMiddleware
 
         $locale = Locale::isEnabled()->where('domain', $domain)->first();
 
-        // if user language is not same as domain we redirect him to correct language domain if exists
-        if (Settings::get('auto_domain_redirect', false) && $locale->code != Helper::getUserLocale()) {
-            // redirect to other domain depending if URI is empty
-            $isUriEmpty = Settings::get('redirec_only_empty_uri', false)
-                ? empty(trim($request->getRequestUri(), '/'))
-                : true;
-            if ($redirectLocale = Locale::findByCode(Helper::getUserLocale()) && $isUriEmpty) {
-                return redirect($this->addHttpToUrl($redirectLocale->domain));
-            }
-        }
-
-        // set locale
         if ($locale) {
+
+            // if user language is not same as domain we redirect him to correct language domain if exists
+            if (Settings::get('auto_domain_redirect', false) && $locale->code != Helper::getUserLocale()) {
+
+                $allowRedirect = Settings::get('use_default_only_for_redirect', false)
+                    ? $locale->is_default
+                    : true;
+
+                // redirect to other domain depending if URI is empty
+                $isUriEmpty = Settings::get('redirec_only_empty_uri', false)
+                    ? empty(trim($request->getRequestUri(), '/'))
+                    : true;
+
+                $redirectLocale = Locale::findByCode(Helper::getUserLocale());
+                if ($redirectLocale && $isUriEmpty && $allowRedirect) {
+                    return redirect($this->addHttpToUrl($redirectLocale->domain));
+                }
+
+            }
+
+            // set locale
             $translator = Translator::instance();
             $translator->setLocale($locale->code);
         }

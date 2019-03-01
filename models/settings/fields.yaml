@@ -9,8 +9,13 @@ fields:
         comment: "This prevents redirect when user is on subpage (Example: page.com/about)"
         type: switch
         default: false
+    use_default_only_for_redirect:
+        label: Use only default language domain for redirecting to other domains
+        type: switch
+        default: false
 
     use_tld:
         label: Use domain TLD
         type: switch
         default: false
+
