@@ -6,7 +6,7 @@ use RainLab\Translate\Models\Locale;
 
 class Helper
 {
-    static public function getUserLocale(): string
+    static public function getUserLocale(): ?string
     {
         $locales = Locale::listAvailable();
         foreach (Request::getLanguages() as $requestLang) {
@@ -14,6 +14,7 @@ class Helper
                 return $requestLang;
             }
         }
+        return null;
     }
 
     static public function getDomainTld($host): string
