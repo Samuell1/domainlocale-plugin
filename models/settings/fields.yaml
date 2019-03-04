@@ -4,21 +4,29 @@ fields:
         comment: Automatic redirect to correct domain depending on user language
         type: switch
         default: false
+        span: left
+    default_domain:
+        label: Default domain
+        default: 'myoctober.com'
+        span: right
     redirec_only_empty_uri:
         label: Redirect only when uri is empty
         comment: "This prevents redirect when user is on subpage (Example: page.com/about)"
         type: switch
         default: false
+        span: left
     use_default_only_for_redirect:
         label: Use only default language domain for redirecting to other domains
         type: switch
         default: false
+        span: left
     use_uri_in_redirect:
         label: Use URI in redirect
         type: switch
         default: false
+        span: left
     use_tld:
         label: Use domain TLD
         type: switch
         default: false
-
+        span: left

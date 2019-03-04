@@ -25,7 +25,7 @@ class DomainLocaleMiddleware
 
                 // allow redirect only for default domain
                 $allowRedirect = Settings::get('use_default_only_for_redirect', false)
-                    ? $locale->is_default
+                    ? $locale->domain == Settings::get('default_domain')
                     : true;
 
                 // redirect to other domain depending if URI is empty
