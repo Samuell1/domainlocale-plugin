@@ -35,7 +35,15 @@ class DomainLocaleMiddleware
 
                 $redirectLocale = Locale::findByCode(Helper::getUserLocale());
                 if ($redirectLocale && $isUriEmpty && $allowRedirect) {
-                    return redirect($this->addHttpToUrl($redirectLocale->domain));
+
+                    $redirectUrl = $redirectLocale->domain;
+
+                    // add uri to redirect url
+                    $redirectUrl .= Settings::get('use_uri_in_redirect', false)
+                        ? $request->getRequestUri()
+                        : '';
+
+                    return redirect($this->addHttpToUrl($redirectUrl));
                 }
 
             }

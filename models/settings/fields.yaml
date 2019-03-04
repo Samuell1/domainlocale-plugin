@@ -13,7 +13,10 @@ fields:
         label: Use only default language domain for redirecting to other domains
         type: switch
         default: false
-
+    use_uri_in_redirect:
+        label: Use URI in redirect
+        type: switch
+        default: false
     use_tld:
         label: Use domain TLD
         type: switch
