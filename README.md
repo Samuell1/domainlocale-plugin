@@ -1,3 +1,3 @@
 # Domain Locale for OctoberCMS
 
-Set locale depending on domain.
+Domain Locale extends Translate plugin and adds option to add domain per locale.
