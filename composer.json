@@ -1,5 +1,5 @@
 {
-    "name": "samuell/domainlocale",
+    "name": "samuell/domainlocale-plugin",
     "type": "october-plugin",
     "description": "Set locale depending on domain",
     "license": "MIT",
