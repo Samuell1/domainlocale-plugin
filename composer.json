@@ -1,0 +1,17 @@
+{
+    "name": "samuell/domainlocale",
+    "type": "october-plugin",
+    "description": "Set locale depending on domain",
+    "license": "MIT",
+    "homepage": "https://github.com/Samuell1/domainlocale-plugin",
+    "keywords": ["domain", "locale", "octobercms"],
+    "authors": [
+        {
+            "name": "Samuell"
+        }
+    ],
+    "require": {
+        "php": ">=7.3",
+        "composer/installers": "~1.0"
+    }
+}
